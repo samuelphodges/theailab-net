@@ -17,6 +17,9 @@ def _rel(path):
 
 
 class TestRequiredFiles:
+    # 404.html is required to exist even though it's currently unreachable via
+    # `python3 -m http.server` — see the `nav_pages` fixture docstring in
+    # conftest.py for why it's kept.
     @pytest.mark.parametrize("filename", ["index.html", "404.html", "css/style.css"])
     def test_required_root_files_exist(self, site_root, filename):
         assert (site_root / filename).exists(), f"Missing required file: {filename}"

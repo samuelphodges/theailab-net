@@ -122,3 +122,56 @@ class TestContentNotEmpty:
             if len(text) < 20:
                 failures.append(f"{_rel(path)}: only {len(text)} chars")
         assert not failures, f"Pages with near-empty .page-content: {failures[:15]}"
+
+
+class TestMetaDescription:
+    def test_all_pages_have_nonempty_meta_description(self, parsed_pages):
+        """Every page must have a <meta name="description"> with non-trivial content."""
+        failures = []
+        for path, _, soup in parsed_pages:
+            tag = soup.find("meta", attrs={"name": "description"})
+            content = tag.get("content", "").strip() if tag else ""
+            if len(content) < 15:
+                failures.append(_rel(path))
+        assert not failures, f"Pages missing/near-empty meta description: {failures[:20]}"
+
+    def test_meta_descriptions_are_unique_per_page(self, parsed_pages):
+        """No two pages should share the exact same meta description text."""
+        seen = {}
+        dupes = []
+        for path, _, soup in parsed_pages:
+            tag = soup.find("meta", attrs={"name": "description"})
+            content = tag.get("content", "").strip() if tag else ""
+            if content in seen:
+                dupes.append(f"{_rel(path)} duplicates {_rel(seen[content])}")
+            else:
+                seen[content] = path
+        assert not dupes, f"Pages with duplicate meta descriptions: {dupes[:20]}"
+
+
+class TestNoDeadlineWeeksSelfDocumented:
+    NO_DEADLINE_WEEKS = ("week-04.html", "week-06.html", "week-10.html", "week-11.html")
+
+    def test_weeks_with_no_due_date_have_explanatory_comment(self, all_html_files):
+        failures = []
+        for f in all_html_files:
+            if f.name in self.NO_DEADLINE_WEEKS:
+                text = f.read_text(encoding="utf-8")
+                if "<!-- no assignment due this week -->" not in text:
+                    failures.append(f.name)
+        assert not failures, f"Weeks missing the no-deadline comment: {failures}"
+
+
+class TestFavicon:
+    def test_all_pages_link_resolvable_favicon(self, parsed_pages):
+        """Every page must have a <link rel="icon"> to a resolvable file."""
+        failures = []
+        for path, _, soup in parsed_pages:
+            link = soup.find("link", rel="icon")
+            if not link or not link.get("href"):
+                failures.append(f"{_rel(path)}: no favicon link")
+                continue
+            target = (path.parent / link["href"]).resolve()
+            if not target.exists():
+                failures.append(f"{_rel(path)}: href '{link['href']}' does not resolve")
+        assert not failures, f"Favicon link issues: {failures[:20]}"

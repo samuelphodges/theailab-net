@@ -34,8 +34,17 @@ def parsed_pages(all_html_files):
 def nav_pages(all_html_files):
     """All HTML files except 404.html.
 
-    404.html is a server-served fallback page, intentionally not linked from
-    navigation or content, so it's excluded from nav-consistency and
+    404.html is a custom error page, intentionally not linked from navigation
+    or content, so it's excluded from nav-consistency and
     reachability-from-index checks.
+
+    It is NOT currently reachable when running the site locally:
+    `python3 -m http.server` (this repo's only supported way of running the
+    site, per the README) has no concept of a custom 404 page and always
+    serves its own built-in error response for unmatched paths. The file is
+    kept in the repo anyway, in case the site is ever deployed to a static
+    host that supports routing unmatched requests to a custom error page
+    (e.g. a redirect/rewrite rule, an `ErrorDocument` directive) — at that
+    point this file would need to be wired up again on the host side.
     """
     return [f for f in all_html_files if f.name != "404.html"]

@@ -1,4 +1,5 @@
 """Integration tests: internal links resolve, nav is consistent, schedule links all weeks."""
+import re
 import pytest
 from bs4 import BeautifulSoup
 from pathlib import Path
@@ -87,3 +88,43 @@ class TestScheduleLinksAllWeeks:
             ):
                 missing.append(f"week-{n:02d}.html")
         assert not missing, f"core/schedule.html missing links to: {missing}"
+
+
+class TestWeekTopicNamesMatchSchedule:
+    def test_week_title_h1_and_breadcrumb_match_schedule_link_text(self, site_root):
+        """Each week page's <title>/<h1>/breadcrumb topic text must exactly
+        match the link text used for that week in core/schedule.html —
+        schedule.html is the source of truth for the full topic name."""
+        schedule = site_root / "core" / "schedule.html"
+        schedule_soup = BeautifulSoup(schedule.read_text(encoding="utf-8"), "lxml")
+        schedule_topics = {}
+        for a in schedule_soup.find_all("a", href=True):
+            m = re.match(r"week-(\d{2})\.html$", Path(a["href"]).name)
+            if m:
+                schedule_topics[int(m.group(1))] = a.get_text(strip=True)
+
+        failures = []
+        for n, topic in schedule_topics.items():
+            page = site_root / "weeks" / f"week-{n:02d}.html"
+            soup = BeautifulSoup(page.read_text(encoding="utf-8"), "lxml")
+            title = soup.title.get_text(strip=True).split("–")[0].strip()
+            h1 = soup.select_one("section.hero h1").get_text(strip=True)
+            crumb = soup.select_one(".breadcrumbs span:last-child").get_text(strip=True)
+            for label, value in (("title", title), ("h1", h1), ("breadcrumb", crumb)):
+                if value != topic:
+                    failures.append(f"week-{n:02d}.html {label}={value!r} != schedule {topic!r}")
+        assert not failures, f"Week topic mismatches vs schedule.html: {failures}"
+
+
+class TestCoreInternalLinkConvention:
+    def test_core_pages_link_to_siblings_with_bare_relative_paths(self, site_root):
+        """core/*.html pages must link to sibling core/ pages with a bare
+        filename (e.g. href="schedule.html"), not the redundant round-trip
+        form (href="../core/schedule.html")."""
+        failures = []
+        for f in (site_root / "core").glob("*.html"):
+            soup = BeautifulSoup(f.read_text(encoding="utf-8"), "lxml")
+            for a in soup.find_all("a", href=True):
+                if a["href"].startswith("../core/"):
+                    failures.append(f"{_rel(f)} -> {a['href']}")
+        assert not failures, f"core/ pages using the '../core/...' convention: {failures}"

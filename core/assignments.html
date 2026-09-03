@@ -4,14 +4,17 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<meta content="Mini-project and Final Project descriptions, deadlines, and grading rubric for IPHS 400, Frontiers in AI." name="description"/>
 <title>Assignments – IPHS 400: Frontiers in AI</title>
 <link href="../css/style.css" rel="stylesheet"/>
+<link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header no-featured-image">
 <div class="header-inner">
 <div class="site-branding"><p class="site-title"><a href="../index.html">IPHS 400: Frontiers in AI</a></p><span class="site-sep">—</span><p class="site-description">Kenyon College — Fall 2026</p></div>
-<nav class="main-nav"><ul>
+<nav aria-label="Primary" class="main-nav"><ul>
 <li><a href="../index.html">Home</a></li>
 <li><a href="syllabus.html">Syllabus</a></li>
 <li><a href="schedule.html">Schedule</a></li>
@@ -22,15 +25,19 @@
 </div>
 <section class="hero"><h1>Assignments</h1></section></header>
 
-<main class="content-wrapper">
-<div class="breadcrumbs"><a href="../index.html">Home</a> » <span>Assignments</span></div>
+<main class="content-wrapper" id="main">
+<div class="breadcrumbs"><a href="../index.html">Home</a> <span aria-hidden="true">»</span> <span>Assignments</span></div>
 <div class="page-content">
 
 <p>Four mini-projects stack on each other over the semester, followed by an original interdisciplinary Final Project. Each mini-project must include a README and a Generative AI Use Statement (see the <a href="policies.html">Policies</a> page).</p>
 
+<!-- kept in sync with core/syllabus.html § Summary of Assignments and Weights — tests/test_content_sync.py enforces this -->
 <h2>Summary of Assignments and Weights</h2>
 <table>
-<tr><th>Assignment</th><th>Weight</th><th>Due</th></tr>
+<thead>
+<tr><th scope="col">Assignment</th><th scope="col">Weight</th><th scope="col">Due</th></tr>
+</thead>
+<tbody>
 <tr><td>Class Participation (incl. attendance and lightning presentation)</td><td>20%</td><td>Ongoing</td></tr>
 <tr><td>Weekly Quizzes (lowest two dropped)</td><td>30%</td><td>Weekly, in class</td></tr>
 <tr><td>Mini-Project 1 — Dev Environment (Pass/No-Pass)</td><td>5%</td><td>Fri, Sep 4</td></tr>
@@ -40,7 +47,8 @@
 <tr><td>Final Project proposal (required, ungraded)</td><td>—</td><td>Fri, Nov 13</td></tr>
 <tr><td>Written-exam alternative opt-in deadline</td><td>—</td><td>Fri, Nov 13</td></tr>
 <tr><td>Final Project (poster + code + release form)</td><td>20%</td><td>Exam period, Dec 14–18</td></tr>
-<tr><th>Total</th><th>100%</th><td></td></tr>
+<tr><th scope="row">Total</th><th scope="row">100%</th><td></td></tr>
+</tbody>
 </table>
 
 <p>All submissions go through Moodle, with a link to a GitHub repository that is either public or privately shared with the instructor (add the instructor's GitHub account as a collaborator). Repositories must be accessible at the deadline.</p>
@@ -91,12 +99,16 @@
 <h2>Mini-Project 3 &amp; 4 Grading Rubric</h2>
 <p>Each graded mini-project (MP3, MP4) is evaluated on:</p>
 <table>
-<tr><th>Criterion</th><th>Weight</th><th>What is assessed</th></tr>
+<thead>
+<tr><th scope="col">Criterion</th><th scope="col">Weight</th><th scope="col">What is assessed</th></tr>
+</thead>
+<tbody>
 <tr><td>Functionality</td><td>15%</td><td>Harness/workflow meets the specified requirements and performs as expected</td></tr>
 <tr><td>Technical Proficiency</td><td>20%</td><td>Effective, non-trivial use of hooks and orchestration (MP3) or of the spec-driven process, CI, and PR workflow (MP4)</td></tr>
 <tr><td>Documentation</td><td>15%</td><td>Clear README/report explaining design decisions, how to reproduce the work, and the Generative AI Use Statement</td></tr>
 <tr><td>Creativity and Extension</td><td>25%</td><td>Thoughtful choice and integration of a FOSS extension (MP3) or scoping and specification of the application (MP4)</td></tr>
 <tr><td>Presentation</td><td>25%</td><td>Clarity of the in-class demo (MP3, Week 10) or presentation (MP4, Week 13), including the ability to answer questions about why the harness is designed as it is</td></tr>
+</tbody>
 </table>
 
 <p><strong>Pass/No-Pass mini-projects (MP1, MP2):</strong> Pass earns the full 5%. It requires a working, documented deliverable that meets all stated requirements, submitted on time. A No-Pass earns 0% until resubmitted; one resubmission within one week of feedback is allowed for up to full credit, at instructor discretion.</p>
