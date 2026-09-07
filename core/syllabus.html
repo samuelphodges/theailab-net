@@ -29,7 +29,7 @@
 <div class="breadcrumbs"><a href="../index.html">Home</a> <span aria-hidden="true">»</span> <span>Syllabus</span></div>
 <div class="page-content">
 
-<h2>Course Details</h2>
+<h2 id="course-details">Course Details</h2>
 <table>
 <tr><th scope="row">Instructor</th><td>Jon Chun</td></tr>
 <tr><th scope="row">Department</th><td>Integrated Program for Humane Studies (IPHS)</td></tr>
@@ -43,13 +43,13 @@
 </table>
 
 <!-- kept in sync with core/about.html § Course Description / Course Goals and Learning Outcomes — tests/test_content_sync.py enforces this -->
-<h2>Course Description</h2>
+<h2 id="course-description">Course Description</h2>
 <p>This upper-division course is a hands-on study of the AI frontier as it stands in late 2026. That frontier is no longer API plumbing or retrieval pipelines. It is <strong>AI software engineering (AI-SWE): coordinating autonomous coding agents through a professional software development lifecycle (SDLC)</strong>. Over the past year the field has moved away from hand-wired API integrations and hand-assembled RAG stacks (now commodity work, and mostly something the agents can do themselves) and toward <strong>harness engineering</strong> — configuring, extending, and orchestrating AI coding agents such as Claude Code and comparable CLI-native tools so they can carry real engineering work end-to-end.</p>
 <p>You build this competency through four mini-projects that stack on each other: your own development environment, agent configuration and custom Skills, agent harness/hook engineering, and a spec-driven SDLC capstone. The semester ends with an original interdisciplinary research project that puts the whole toolchain to work on a question you choose.</p>
 <p>Running alongside the technical work is a discussion of what happens (to labor, to ethics, to what we can know) when agentic systems replace or augment knowledge work. We take that up explicitly in Weeks 3, 8, and 12, and again in the lightning presentations.</p>
 <p><strong>Note:</strong> AI tooling changes on a timescale of weeks, not years. Expect the specific tools, readings, and technical references in this syllabus to be revised during the semester. Core learning objectives, assignment weights, and grading policies will not change without advance notice.</p>
 
-<h2>Course Goals and Learning Outcomes</h2>
+<h2 id="course-goals-and-learning-outcomes">Course Goals and Learning Outcomes</h2>
 <p>By the end of this course, students will be able to:</p>
 <ol>
 <li>Configure a professional, reproducible development environment (shell, terminal, dotfiles) suitable for agentic software engineering, with sound secrets hygiene</li>
@@ -64,16 +64,16 @@
 </ol>
 <p>Outcome 6 is assessed through the ethics discussions in Weeks 3, 8, and 12, related quiz questions, and the lightning presentation. Outcomes 1–5 map to Mini-Projects 1–4; Outcomes 7–9 map to the Final Project.</p>
 
-<h2>Course Readings and Materials</h2>
+<h2 id="course-readings-and-materials">Course Readings and Materials</h2>
 <p><strong>Textbooks:</strong> None required. Readings come from current documentation, engineering blog posts, research papers, and tooling repositories. They are updated weekly (the field moves that fast) and posted to the course GitHub repository.</p>
 
-<h3>Hardware and Operating System</h3>
+<h3 id="hardware-and-operating-system">Hardware and Operating System</h3>
 <ul class="item-list">
 <li>A laptop you can bring to every class session. Mini-Project 1 assumes a Unix-style shell (zsh).</li>
 <li><strong>macOS or Linux</strong> are supported directly. <strong>Windows users must install WSL2 (Ubuntu) during Week 1</strong>; all shell/dotfiles work is done inside WSL2. See the instructor in Week 1 if this is a problem.</li>
 </ul>
 
-<h3>Required Accounts and Subscriptions</h3>
+<h3 id="required-accounts-and-subscriptions">Required Accounts and Subscriptions</h3>
 <p>Set these up during Week 1 using a <strong>personal (non-@kenyon.edu) email address</strong>, so your accounts and portfolio outlive your Kenyon login:</p>
 <table>
 <thead>
@@ -91,7 +91,7 @@
 <p><strong>Financial Hardship:</strong> Students who cannot afford required subscriptions should contact the instructor privately. Alternative arrangements are available and confidential.</p>
 
 <!-- kept in sync with core/policies.html § Secrets Hygiene and Agent Safety — tests/test_content_sync.py enforces this -->
-<h3>Secrets Hygiene and Agent Safety (required practice for all projects)</h3>
+<h3 id="secrets-hygiene-and-agent-safety-required-practice-for-all-projects">Secrets Hygiene and Agent Safety (required practice for all projects)</h3>
 <p>This course has you publish configuration repositories and give coding agents real permissions on your own machine, so the following are course rules:</p>
 <ul class="item-list">
 <li><strong>Never commit API keys, tokens, or passwords</strong> to any repository, public or private. Keep secrets in environment variables or in a <code>.env</code> file listed in <code>.gitignore</code>, and turn on GitHub secret scanning / push protection for your account. The first leaked key is a learning moment. After that it is a grading deduction.</li>
@@ -100,7 +100,7 @@
 <li>Report any accidental leak to the instructor immediately so we can rotate keys. There is no penalty for prompt disclosure.</li>
 </ul>
 
-<h2>Policy on Changes to the Syllabus</h2>
+<h2 id="policy-on-changes-to-the-syllabus">Policy on Changes to the Syllabus</h2>
 <p>Given the pace of change in agentic AI tooling, this syllabus — especially the specific readings, tools, and technical references in the weekly schedule — may be updated during the semester. Core learning objectives, assignment weights, and grading policies will not change without advance notice. Changes will be communicated via:</p>
 <ul class="item-list">
 <li>Weekly updates to the course GitHub repository (the authoritative version of the schedule)</li>
@@ -110,7 +110,7 @@
 <p><strong>Communication:</strong> Email is the best way to reach the instructor outside office hours; expect a response within one business day (longer on weekends). Questions of general interest may be answered to the whole class.</p>
 
 <!-- kept in sync with core/assignments.html § Summary of Assignments and Weights — tests/test_content_sync.py enforces this -->
-<h2>Summary of Assignments and Weights</h2>
+<h2 id="summary-of-assignments-and-weights">Summary of Assignments and Weights</h2>
 <table>
 <thead>
 <tr><th scope="col">Assignment</th><th scope="col">Weight</th><th scope="col">Due</th></tr>
@@ -131,7 +131,7 @@
 <p>All submissions go through Moodle, with a link to a GitHub repository that is either <strong>public or privately shared with the instructor</strong> (add the instructor's GitHub account as a collaborator). Repositories must be accessible at the deadline.</p>
 <p>See <a href="assignments.html">Assignments</a> for the full mini-project descriptions, the Final Project requirements, and the Mini-Project 3 &amp; 4 grading rubric. See <a href="policies.html">Policies</a> for the full Generative AI Use Policy, Late/Missing Work Policy, Attendance Policy, Student Work and External Sharing policy, and College statements (Academic Honesty, Accessibility, Title IX, Wellbeing, Copyright).</p>
 
-<h2>Grading Scale</h2>
+<h2 id="grading-scale">Grading Scale</h2>
 <table>
 <thead>
 <tr><th scope="col">Grade</th><th scope="col">Percentage</th><th scope="col">Description</th></tr>
@@ -151,5 +151,7 @@
 <footer class="site-footer">
 <p>IPHS 400: Frontiers in AI · Kenyon College</p>
 </footer>
+<script defer src="../js/search-index.js"></script>
+<script defer src="../js/site-search.js"></script>
 </body>
 </html>

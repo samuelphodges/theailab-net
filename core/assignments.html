@@ -32,7 +32,7 @@
 <p>Four mini-projects stack on each other over the semester, followed by an original interdisciplinary Final Project. Each mini-project must include a README and a Generative AI Use Statement (see the <a href="policies.html">Policies</a> page).</p>
 
 <!-- kept in sync with core/syllabus.html § Summary of Assignments and Weights — tests/test_content_sync.py enforces this -->
-<h2>Summary of Assignments and Weights</h2>
+<h2 id="summary-of-assignments-and-weights">Summary of Assignments and Weights</h2>
 <table>
 <thead>
 <tr><th scope="col">Assignment</th><th scope="col">Weight</th><th scope="col">Due</th></tr>
@@ -53,37 +53,37 @@
 
 <p>All submissions go through Moodle, with a link to a GitHub repository that is either public or privately shared with the instructor (add the instructor's GitHub account as a collaborator). Repositories must be accessible at the deadline.</p>
 
-<h2>Mini-Project 1 — Development Environment Configuration</h2>
+<h2 id="mini-project-1-development-environment-configuration">Mini-Project 1 — Development Environment Configuration</h2>
 <p><strong>5%, Pass/No-Pass. Due Friday, September 4.</strong></p>
 <p>Configure a professional shell/terminal environment with documented customizations (e.g., zsh + <code>.zprofile</code>/<code>.zshrc</code>, XDG base directories, a modern CLI toolkit such as <code>ripgrep</code>, <code>fzf</code>, <code>bat</code>, <code>eza</code>, <code>tmux</code>; VS Code with relevant extensions).</p>
 <p><strong>Deliverable:</strong> a GitHub dotfiles repository (public recommended for portfolio value, or privately shared) with a README documenting your configuration choices and rationale, and a <code>.gitignore</code> showing secrets hygiene. Graded pass/no-pass on completeness and documentation quality.</p>
 
-<h2>Mini-Project 2 — AI Coding Agent Configuration</h2>
+<h2 id="mini-project-2-ai-coding-agent-configuration">Mini-Project 2 — AI Coding Agent Configuration</h2>
 <p><strong>5%, Pass/No-Pass. Due Friday, September 25.</strong></p>
 <p><em>High-level workflow pack.</em> Package 3–5 reusable Claude Code customizations (Skills, a slash command, and/or a subagent) into a small project plugin a classmate can install. The point is to get repeated prompts out of chat and out of <code>CLAUDE.md</code> and into invocable playbooks that speed up review, status checks, and explanation.</p>
 <p><strong>Deliverable:</strong> the plugin repository plus a short (≤3 min) recorded or live demo showing both a typed <code>/command</code> and an auto-triggered Skill.</p>
 
-<h2>Mini-Project 3 — Agent Harness and Hooks</h2>
+<h2 id="mini-project-3-agent-harness-and-hooks">Mini-Project 3 — Agent Harness and Hooks</h2>
 <p><strong>10%, graded. Due Friday, October 23 (demos Tuesday, October 27).</strong></p>
 <p><em>Low-level reliability harness.</em> Add 3–5 lifecycle hooks so the agent formats, logs, injects repo state, or blocks dangerous commands whether or not the model "remembers" the rules.</p>
 <p>Requirements: at least one hook must <strong>deny</strong> a tool call (e.g., destructive <code>git</code>/<code>rm</code> commands); at least one must produce a <strong>side effect</strong> such as lint-on-write or a Stop check that verifies tests actually ran; and the harness must integrate <strong>at least one FOSS extension</strong> from the ecosystem surveyed in Week 8 (observability/usage monitoring, context-engineering utilities, session-history tools, etc.), with the choice justified in the README.</p>
 <p><strong>Deliverable:</strong> the hook configuration, a trace or log showing that the runtime (not the prompt) enforced the behavior, and a 5-minute in-class demo (Week 10) walking through the deny-hook, the side-effect hook, and the trace.</p>
 
-<h2>Mini-Project 4 — SWE/SDLC Best Practices Capstone</h2>
+<h2 id="mini-project-4-swe-sdlc-best-practices-capstone">Mini-Project 4 — SWE/SDLC Best Practices Capstone</h2>
 <p><strong>10%, graded. Due Friday, November 20 (presentations Nov 17/19).</strong></p>
 <p>Take a real-world, high-impact, non-trivial greenfield web application (instructor-supplied, or self-scoped and instructor-approved) from ideation to a robust minimum viable product (MVP) using a complete spec-driven software development lifecycle: <strong>plan → decompose → implement → test → review</strong>, with <strong>deploy</strong> optional but strongly encouraged (e.g., GitHub Pages, Netlify, or Vercel).</p>
 <p>Use the harness you built in MP1–3. Must include at least one instance of multi-agent/subagent orchestration (parallel dispatch, isolated worktrees, or a reviewer/implementer split) and a CI check (GitHub Actions) that runs the test suite on pull requests.</p>
 <p><strong>Deliverable:</strong> the repository (spec documents, PR history, CI runs, README), plus a 5-minute in-class presentation (Week 13). Graded on process adherence, final PR/deliverable quality, and documentation.</p>
 
-<h2>Final Project</h2>
+<h2 id="final-project">Final Project</h2>
 <p><strong>20%. Due exam period, December 14–18.</strong></p>
 <p>An original interdisciplinary research project that puts the MP1–4 agent harness to work on a real research question of your choosing, applying at least one key technique from the mini-projects.</p>
 <p>A one-page proposal (question, data/sources, planned use of the harness, expected deliverable) is due <strong>Friday, November 13</strong> and must be approved by the instructor before substantial work begins. The deliverable is a professional research poster, code and data, a signed Kenyon Digital Release form, and publication to your public digital portfolio at <strong>digital.kenyon.edu/dh</strong>. This is the one place the course is not AI-maximalist: poster content, and especially the prose, must be your own high-touch human writing and must not read like AI slop.</p>
 
-<h3>Alternative Format</h3>
+<h3 id="alternative-format">Alternative Format</h3>
 <p>Students who do not wish to publish their work publicly may instead complete a <strong>3-hour written exam</strong> in lieu of the poster/portfolio requirement, covering the semester's technical and conceptual material. Exam format and logistics will be provided separately. Students choosing this option must notify the instructor by <strong>Friday, November 13 (end of Week 12)</strong>.</p>
 
-<h3>Final Project Requirements</h3>
+<h3 id="final-project-requirements">Final Project Requirements</h3>
 <ol>
 <li><strong>Proposal:</strong> One-page proposal due Friday, November 13, approved by the instructor before substantial work begins.</li>
 <li><strong>Poster:</strong> Professional research poster in Microsoft PowerPoint format (<code>.ppt</code>/<code>.pptx</code>), not PDF or Keynote, for digital.kenyon.edu/dh compatibility. Use the course poster template (link on the course repository).</li>
@@ -96,7 +96,7 @@
 <li><strong>Moodle check:</strong> Confirm all grades, quizzes, and presentations are accurately recorded on Moodle.kenyon.edu before the end of the exam period.</li>
 </ol>
 
-<h2>Mini-Project 3 &amp; 4 Grading Rubric</h2>
+<h2 id="mini-project-3-4-grading-rubric">Mini-Project 3 &amp; 4 Grading Rubric</h2>
 <p>Each graded mini-project (MP3, MP4) is evaluated on:</p>
 <table>
 <thead>
@@ -118,5 +118,7 @@
 <footer class="site-footer">
 <p>IPHS 400: Frontiers in AI · Kenyon College</p>
 </footer>
+<script defer src="../js/search-index.js"></script>
+<script defer src="../js/site-search.js"></script>
 </body>
 </html>

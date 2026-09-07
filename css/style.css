@@ -1,26 +1,40 @@
-/* Twenty Nineteen-faithful theme for Programming Humanity
-   Design tokens measured from programminghumanity.wordpress.com (2026-08-25):
-   serif body 22px/1.8, bold sans headings. The original theme's
-   featured-image/duotone hero variant, blog post-preview styles, badges,
-   and WP block styles were never used by this site's pages and have been
-   removed (v1 cleanup, 2026-09-03).
+/* Kenyon College (kenyon.edu) visual match for IPHS 400 course site.
+   Design tokens measured from kenyon.edu's live stylesheet (2026-09-03):
+   deep navy #151538 as the dominant ink/accent, purple/periwinkle CTAs,
+   Gothia (serif display) + Matter (sans body/nav) typefaces. Gothia and
+   Matter are licensed fonts we don't have access to, so headings and body
+   text use system-font stacks anchored on the same fallbacks Kenyon's own
+   CSS falls back to ("Times New Roman" serif / "Myriad Pro" sans) rather
+   than loading a third-party font — keeps the site dependency-free, same
+   as before.
+
+   This is a CSS-only redesign: every HTML file is untouched, so all page
+   content, structure, and the existing pytest suite are unaffected.
 
    No print stylesheet or dark-mode (prefers-color-scheme) support in v1 —
    deliberate scope cut, not an oversight. */
 
 :root {
+  --navy: #151538;
+  --purple: #4b2e84;
+  --periwinkle: #8f80ff;
+  --text: #4e4e70;
+  --text-lt: #767696;
   --bg: #fff;
-  --text: #111;
-  --text-lt: #767676;
-  --accent: #0073aa;
-  --accent-dk: #005177;
-  --border: #e0e0e0;
-  --code-bg: #f5f5f5;
-  --fh: "NonBreakingSpaceOverride", "Hoefler Text", Garamond, "Times New Roman", serif;
-  --fb: "NonBreakingSpaceOverride", -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  --mw: 640px;             /* text column measure */
-  --mww: 1168px;
-  --col-left: calc(8.33vw + 28px);  /* left offset of the content column */
+  --bg-soft: #f3f7f7;
+  --bg-warm: #f5eeee;
+  --border: #d5d5de;
+  --code-bg: #f3f7f7;
+
+  --accent: var(--purple);
+  --accent-dk: var(--navy);
+
+  --fh: Georgia, "Times New Roman", Times, serif;                 /* Gothia fallback */
+  --fb: -apple-system, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; /* Matter fallback */
+
+  --mw: 700px;              /* text column measure */
+  --mww: 1120px;             /* outer container width */
+  --pad: 2rem;
 }
 
 /* Reset */
@@ -30,7 +44,7 @@
   position: absolute;
   left: -999px;
   top: 0;
-  background: var(--accent);
+  background: var(--navy);
   color: #fff;
   padding: 0.75rem 1.25rem;
   z-index: 100;
@@ -43,21 +57,21 @@
 
 body {
   margin: 0;
-  font-family: var(--fh);      /* serif reading text (Twenty Nineteen) */
-  font-size: 22px;
-  line-height: 1.8;
+  font-family: var(--fb);
+  font-size: 17px;
+  line-height: 1.7;
   color: var(--text);
   background: var(--bg);
 }
 
 a {
-  color: var(--accent);
+  color: var(--purple);
   text-decoration: underline;
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 1px;
   text-underline-offset: 2px;
 }
 a:hover {
-  color: var(--accent-dk);
+  color: var(--navy);
 }
 
 img {
@@ -66,10 +80,11 @@ img {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--fb);      /* bold sans headings (Twenty Nineteen) */
+  font-family: var(--fh);
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   line-height: 1.2;
+  color: var(--navy);
 }
 
 /* ===================== */
@@ -80,16 +95,20 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   color: var(--text);
   background: var(--bg);
-  padding: 44px 0 0;
+  border-bottom: 1px solid var(--border);
 }
 
 .header-inner {
   position: relative;
-  z-index: 1;
-  margin: 0 0 0 var(--col-left);
+  margin: 0 auto;
   max-width: var(--mww);
-  padding-right: 2rem;
-  text-align: left;
+  padding: 1.5rem var(--pad) 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  column-gap: 2rem;
+  row-gap: 0.5rem;
 }
 
 /* Branding: "Site Title — Tagline" on one line */
@@ -97,37 +116,38 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  column-gap: 0.75rem;
+  column-gap: 0.6rem;
 }
 .site-title {
-  font-family: var(--fb);
-  font-size: 24.75px;
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-family: var(--fh);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   margin: 0;
   line-height: 1.2;
+  color: var(--navy);
 }
 .site-title a {
   color: inherit;
   text-decoration: none;
 }
 .site-title a:hover {
-  color: inherit;
+  color: var(--purple);
   text-decoration: none;
 }
 .site-sep {
-  font-family: var(--fh);
-  font-size: 24.75px;
+  font-family: var(--fb);
+  font-size: 15px;
+  color: var(--border);
 }
 .site-description {
-  font-family: var(--fh);
-  font-size: 24.75px;
+  font-family: var(--fb);
+  font-size: 15px;
   font-weight: 400;
   font-style: normal;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   margin: 0;
-  line-height: 1.25;
-  opacity: 1;
+  line-height: 1.4;
 }
 .site-header.no-featured-image .site-description {
   color: var(--text-lt);
@@ -135,7 +155,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Navigation */
 .main-nav {
-  margin-top: 0.6rem;
+  margin-top: 0;
 }
 .main-nav ul {
   list-style: none;
@@ -144,69 +164,66 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  column-gap: 1.5rem;
+  column-gap: 1.75rem;
 }
 .main-nav li a {
-  color: inherit;
+  color: var(--navy);
   font-family: var(--fb);
-  font-weight: 700;
-  font-size: 24.75px;
-  letter-spacing: -0.02em;
-  text-transform: none;
-  padding: 0;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.35rem 0;
   text-decoration: none;
+  border-bottom: 2px solid transparent;
 }
 .main-nav li a:hover,
 .main-nav li a.active {
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
-  color: inherit;
-  background: none;
+  color: var(--purple);
+  border-bottom-color: var(--periwinkle);
 }
 .site-header.no-featured-image .main-nav li a {
-  color: var(--accent);
+  color: var(--navy);
 }
 
 /* ===================== */
 /*   Hero / entry title  */
 /* ===================== */
 
-/* On featured-image pages the hero sits at the bottom-left of the image;
-   on plain pages it flows in the document with a gray dash. */
+/* Kenyon's homepage hero is a full-bleed campus photo with an overlaid
+   serif quote; this site carries no photography, so the hero becomes a
+   solid navy panel — same institutional weight, no stock imagery. */
 .hero {
   position: relative;
   z-index: 1;
-  background: none;
-  color: inherit;
-  padding: 0;
-  margin: 3rem 0 0 var(--col-left);
-  max-width: calc(var(--mw) + 4rem);
-  padding-right: 2rem;
+  background: var(--navy);
+  color: #fff;
+  padding: 2.75rem var(--pad);
 }
 .hero h1 {
-  font-family: var(--fb);
-  font-size: 49.5px;
+  font-family: var(--fh);
+  font-size: 38px;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  margin: 0;
-  max-width: none;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  margin: 0 auto;
+  max-width: var(--mww);
+  color: #fff;
 }
 .hero h1::before {
   content: "";
   display: block;
-  width: 2.2em;
-  height: 2px;
+  width: 2.4em;
+  height: 3px;
   margin-bottom: 1rem;
-  background: currentColor;
+  background: var(--periwinkle);
 }
 .site-header.no-featured-image .hero {
-  margin-top: 4rem;
-  margin-bottom: 0.5rem;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .site-header.no-featured-image .hero h1::before {
-  background: var(--text-lt);
+  background: var(--periwinkle);
 }
 
 /* ===================== */
@@ -214,63 +231,81 @@ h1, h2, h3, h4, h5, h6 {
 /* ===================== */
 
 .content-wrapper {
-  max-width: calc(var(--mw) + 4rem);
-  margin: 0 0 0 var(--col-left);
-  padding: 2.5rem 2rem 4rem 0;
+  max-width: var(--mww);
+  margin: 0 auto;
+  padding: 2.75rem var(--pad) 4rem;
 }
 
 /* Breadcrumbs (repo addition — quiet) */
 .breadcrumbs {
   font-family: var(--fb);
-  font-size: 15px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
   color: var(--text-lt);
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.5rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
 }
 .breadcrumbs a {
-  color: var(--accent);
+  color: var(--purple);
   text-decoration-thickness: 1px;
+}
+.breadcrumbs [aria-hidden="true"] {
+  color: var(--border);
+  padding: 0 0.15rem;
 }
 
 /* Page content typography */
+.page-content {
+  max-width: var(--mw);
+}
+
 .page-content h1,
 .page-content h2,
 .page-content h3,
 .page-content h4 {
-  font-family: var(--fb);
-  color: var(--text);
-  margin-top: 2rem;
+  font-family: var(--fh);
+  color: var(--navy);
+  margin-top: 2.25rem;
   margin-bottom: 0.8rem;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
-.page-content h2 { font-size: 36px; }
-.page-content h3 { font-size: 28px; }
-.page-content h4 { font-size: 22px; }
+.page-content h2 {
+  font-size: 26px;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.page-content h3 { font-size: 20px; }
+.page-content h4 { font-size: 17px; }
 
 .page-content p {
-  margin: 1.5rem 0;
+  margin: 1.25rem 0;
 }
 
 .page-content blockquote {
-  border-left: 2px solid var(--accent);
+  border-left: 3px solid var(--periwinkle);
   margin: 1.5rem 0;
-  padding: 0 0 0 1.5rem;
+  padding: 0.25rem 0 0.25rem 1.5rem;
+  font-family: var(--fh);
   font-style: italic;
-  font-size: 1em;
-  color: var(--text);
+  font-size: 1.05em;
+  color: var(--navy);
 }
 
 .page-content pre,
 .page-content code {
   background: var(--code-bg);
-  font-size: 0.8em;
+  font-size: 0.85em;
   border-radius: 3px;
 }
 .page-content pre {
   padding: 1rem;
   overflow-x: auto;
   line-height: 1.6;
+  border: 1px solid var(--border);
 }
 .page-content code {
   padding: 0.15rem 0.4rem;
@@ -278,21 +313,22 @@ h1, h2, h3, h4, h5, h6 {
 .page-content pre code {
   padding: 0;
   background: none;
+  border: none;
 }
 
 .page-content ul,
 .page-content ol {
-  padding-left: 1.5rem;
+  padding-left: 1.4rem;
 }
 .page-content li {
-  margin: 0.35rem 0;
+  margin: 0.4rem 0;
 }
 
 .page-content hr {
   border: none;
   border-top: 2px solid var(--border);
-  margin: 2rem 0;
-  width: 2.2em;
+  margin: 2.5rem 0;
+  width: 2.4em;
   margin-left: 0;
 }
 
@@ -300,18 +336,30 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   border-collapse: collapse;
   margin: 1.5rem 0;
-  font-size: 0.8em;
+  font-size: 0.85em;
   font-family: var(--fb);
+  max-width: none;
 }
 .page-content th,
 .page-content td {
   border: 1px solid var(--border);
-  padding: 0.5rem 0.75rem;
+  padding: 0.6rem 0.85rem;
   text-align: left;
 }
-.page-content th {
-  background: var(--code-bg);
+.page-content thead th {
+  background: var(--navy);
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.page-content th[scope="row"] {
+  background: var(--bg-soft);
+  color: var(--navy);
   font-weight: 700;
+  white-space: nowrap;
+}
+.page-content tbody tr:nth-child(even) {
+  background: var(--bg-soft);
 }
 
 .page-content figure {
@@ -319,7 +367,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .page-content figcaption {
   font-family: var(--fb);
-  font-size: 16px;
+  font-size: 14px;
   color: var(--text-lt);
   font-style: italic;
   text-align: center;
@@ -333,11 +381,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .section {
   margin-bottom: 2.5rem;
+  max-width: var(--mw);
 }
 .section h2 {
-  font-family: var(--fb);
-  color: var(--text);
-  font-size: 32px;
+  font-family: var(--fh);
+  color: var(--navy);
+  font-size: 24px;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
 }
 
 .item-list {
@@ -345,11 +396,26 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
 }
 .item-list li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--border);
 }
 .item-list li:last-child {
   border-bottom: none;
+}
+.item-list li a {
+  display: block;
+  padding: 0.75rem 0.25rem;
+  color: var(--navy);
+  font-family: var(--fb);
+  font-weight: 600;
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  padding-left: 0.75rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.item-list li a:hover {
+  border-left-color: var(--periwinkle);
+  background: var(--bg-soft);
+  color: var(--purple);
 }
 
 /* ===================== */
@@ -357,53 +423,191 @@ h1, h2, h3, h4, h5, h6 {
 /* ===================== */
 
 .site-footer {
-  border-top: none;
-  background: var(--bg);
-  color: var(--text-lt);
+  border-top: 3px solid var(--periwinkle);
+  background: var(--navy);
+  color: #d5d5de;
   font-family: var(--fb);
-  padding: 2rem 2rem 2rem var(--col-left);
+  padding: 1.75rem var(--pad);
   text-align: left;
-  font-size: 16px;
+  font-size: 14px;
+}
+.site-footer p {
+  max-width: var(--mww);
+  margin: 0 auto;
 }
 .site-footer a {
-  color: var(--accent);
+  color: #fff;
+}
+.site-footer a:hover {
+  color: var(--periwinkle);
 }
 
 /* ===================== */
 /*   Responsive          */
 /* ===================== */
 
-@media (max-width: 1024px) {
-  :root {
-    --col-left: calc(4vw + 16px);
-  }
+/* ===================== */
+/*   Site Search widget  */
+/* ===================== */
+
+.site-search-toggle {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 50;
+  background: var(--navy);
+  color: #fff;
+  font-family: var(--fb);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: none;
+  border-radius: 999px;
+  padding: 0.85rem 1.4rem;
+  box-shadow: 0 4px 16px rgba(21, 21, 56, 0.35);
+  cursor: pointer;
+}
+.site-search-toggle:hover,
+.site-search-toggle:focus-visible {
+  background: var(--purple);
+}
+
+.site-search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(21, 21, 56, 0.55);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10vh 1.25rem 1.25rem;
+}
+.site-search-overlay[hidden] {
+  display: none;
+}
+
+.site-search-panel {
+  background: #fff;
+  width: 100%;
+  max-width: 640px;
+  border-radius: 8px;
+  box-shadow: 0 12px 40px rgba(21, 21, 56, 0.45);
+  padding: 1.25rem;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-search-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0.75rem;
+}
+
+.site-search-input {
+  flex: 1;
+  font-family: var(--fb);
+  font-size: 17px;
+  border: none;
+  outline: none;
+  color: var(--navy);
+  background: transparent;
+}
+.site-search-input::placeholder {
+  color: var(--text-lt);
+}
+
+.site-search-close {
+  background: none;
+  border: none;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--text-lt);
+  cursor: pointer;
+  padding: 0.25rem 0.4rem;
+}
+.site-search-close:hover {
+  color: var(--navy);
+}
+
+.site-search-hint {
+  font-family: var(--fb);
+  font-size: 13px;
+  color: var(--text-lt);
+  margin: 0.75rem 0 0;
+}
+
+.site-search-results {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  overflow-y: auto;
+}
+.site-search-results li a {
+  display: block;
+  padding: 0.65rem 0.4rem;
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+}
+.site-search-results li:last-child a {
+  border-bottom: none;
+}
+.site-search-results li a:hover,
+.site-search-results li a:focus-visible {
+  background: var(--bg-soft);
+}
+.site-search-result-page {
+  display: block;
+  font-family: var(--fb);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--purple);
+}
+.site-search-result-excerpt {
+  display: block;
+  font-family: var(--fb);
+  font-size: 13px;
+  color: var(--text-lt);
+  margin-top: 0.15rem;
+}
+.site-search-no-results {
+  font-family: var(--fb);
+  font-size: 14px;
+  color: var(--text-lt);
+  padding: 0.65rem 0.4rem;
+}
+
+body.site-search-open {
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
   body {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   :root {
-    --col-left: 1rem;
+    --pad: 1.25rem;
   }
 
-  .site-header {
-    padding-top: 32px;
-  }
-
-  .site-title,
-  .site-sep,
-  .site-description,
-  .main-nav li a {
-    font-size: 20px;
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .hero h1 {
-    font-size: 34px;
+    font-size: 28px;
   }
 
   .content-wrapper {
-    padding: 2rem 1rem 3rem 0;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
+
+  .page-content table {
+    display: block;
+    overflow-x: auto;
   }
 }

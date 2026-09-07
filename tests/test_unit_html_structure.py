@@ -175,3 +175,48 @@ class TestFavicon:
             if not target.exists():
                 failures.append(f"{_rel(path)}: href '{link['href']}' does not resolve")
         assert not failures, f"Favicon link issues: {failures[:20]}"
+
+
+class TestSiteSearchAssets:
+    """The client-side site-search widget (js/site-search.js, data from
+    js/search-index.js) must be wired into every page except 404.html —
+    excluded for the same reason it's excluded from nav_pages (see that
+    fixture's docstring): it's not reachable via `python3 -m http.server`,
+    so there's nothing for the widget to search from there."""
+
+    def test_all_non_404_pages_link_resolvable_search_scripts(self, parsed_pages):
+        failures = []
+        for path, _, soup in parsed_pages:
+            if path.name == "404.html":
+                continue
+            scripts = [tag.get("src", "") for tag in soup.find_all("script")]
+            for needed in ("search-index.js", "site-search.js"):
+                matches = [s for s in scripts if s.endswith(needed)]
+                if not matches:
+                    failures.append(f"{_rel(path)}: missing <script> for {needed}")
+                    continue
+                target = (path.parent / matches[0]).resolve()
+                if not target.exists():
+                    failures.append(f"{_rel(path)}: src '{matches[0]}' does not resolve")
+        assert not failures, f"Site-search script issues: {failures[:20]}"
+
+
+class TestPageContentHeadingIds:
+    def test_h2_h3_ids_are_unique_per_page(self, parsed_pages):
+        """Every <h2>/<h3> inside .page-content should carry a unique id
+        (added by scripts/build_search_index.py) so the search widget can
+        deep-link to it."""
+        failures = []
+        for path, _, soup in parsed_pages:
+            if path.name == "404.html":
+                continue
+            content = soup.select_one(".page-content")
+            if not content:
+                continue
+            headings = content.find_all(["h2", "h3"])
+            ids = [h.get("id") for h in headings]
+            if any(not i for i in ids):
+                failures.append(f"{_rel(path)}: heading missing id")
+            elif len(ids) != len(set(ids)):
+                failures.append(f"{_rel(path)}: duplicate heading ids")
+        assert not failures, f"Heading id issues: {failures[:20]}"
