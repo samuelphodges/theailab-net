@@ -26,49 +26,18 @@ on Moodle.
 ├── weeks/                   # One page per week, week-01.html … week-15.html
 ├── css/
 │   └── style.css            # Single shared stylesheet, no build step
-├── js/
-│   ├── site-search.js       # Client-side search widget (no network calls)
-│   └── search-index.js      # Generated data the widget searches — see below
-├── scripts/
-│   └── build_search_index.py  # One-off script that (re)generates js/search-index.js
 ├── tests/                   # pytest suite validating the site
 │   ├── conftest.py
 │   ├── test_unit_html_structure.py
 │   ├── test_integration_links.py
 │   ├── test_e2e_site.py
-│   ├── test_accessibility.py
-│   ├── test_content_sync.py
-│   ├── test_css_hygiene.py
 │   └── requirements.txt
 ```
 
-The site is static HTML/CSS with no build step or JS framework, other than
-the small vanilla-JS search widget described below. Every page shares one
-stylesheet and a common header/nav/hero/footer skeleton. It is meant to be
-viewed with a local test webserver only — there is no deploy pipeline or
-external hosting configuration.
-
-## Site Search
-
-Every page except `404.html` includes a "Search this site" button (bottom
-right) backed by `js/site-search.js`. It matches what you type against
-`js/search-index.js` — page titles, section headings, and short excerpts —
-entirely client-side: no network requests, no external API, no cost.
-
-`js/search-index.js` is generated, not hand-written. If you edit page
-content, headings, or add a new page, regenerate it:
-
-```bash
-source .venv/bin/activate  # needs bs4/lxml, already in tests/requirements.txt
-python3 scripts/build_search_index.py
-```
-
-The script also adds an `id` to any `<h2>`/`<h3>` inside `.page-content`
-that doesn't already have one, so the search widget can deep-link to that
-section (`page.html#section-slug`). Commit both the regenerated
-`js/search-index.js` and any HTML files it added ids to.
-`tests/test_unit_html_structure.py`'s `TestSiteSearchAssets` and
-`TestPageContentHeadingIds` guard that every page stays wired up correctly.
+The site is static HTML/CSS with no build step or JS framework. Every page
+shares one stylesheet and a common header/nav/hero/footer skeleton. It is
+meant to be viewed with a local test webserver only — there is no deploy
+pipeline or external hosting configuration.
 
 ## Local Development
 
